@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Image, StyleSheet, Text, View, Pressable } from "react-native";
+import {FokusButton} from '../components/FokusButton'
 
 
 const pomodoro = [
@@ -48,9 +49,7 @@ export default function Index() {
         <Text style={styles.timer}>
           {new Date(timerType.initialValue * 1000).toLocaleTimeString('pt-br', { minute: '2-digit', second: '2-digit' })}
         </Text>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Começar</Text>
-        </Pressable>
+        <FokusButton/>
       </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>Projeto fictício e sem fins comerciais.</Text>
@@ -97,16 +96,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: "#FFF",
     textAlign: 'center',
-  },
-  button: {
-    backgroundColor: "#BB72FF",
-    borderRadius: 32,
-    padding: 8,
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: '#021123',
-    fontSize: 18,
   },
   footer: {
     width: '80%',

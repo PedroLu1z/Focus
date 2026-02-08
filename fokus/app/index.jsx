@@ -6,18 +6,21 @@ const pomodoro = [
   {
     id: 'focus',
     initialValue: 25,
-    image: require('./pomodoro.png')
+    image: require('./pomodoro.png'),
+    display: 'Focus'
 
   },
   {
     id: 'short',
     initialValue: 5,
-    image: require('./short.png')
+    image: require('./short.png'),
+    display: 'Pausa curta'
   },
   {
-    id: 'long', 
+    id: 'long',
     initialValue: 15,
-    image: require('./long.png')
+    image: require('./long.png'),
+    display: 'Pausa Longa'
   }
 ]
 
@@ -30,24 +33,20 @@ export default function Index() {
       <Image source={timerType.image} />
       <View style={styles.actions}>
         <View style={styles.context}>
-          <Pressable style={styles.contextButtonActive}>
-            <Text style={styles.contextButtonText}>Foco</Text>
-          </Pressable>
-
-          <Pressable> 
-            <Text style={styles.contextButtonText}>
-              Pausa Curta
-            </Text>
-          </Pressable>
-
-          <Pressable>
-            <Text style={styles.contextButtonText}>
-              Pausa Longa
-            </Text>
-          </Pressable>
+          {pomodoro.map(p => (
+            <Pressable 
+            key={p.id}
+            style={timerType.id === p.id ? styles.contextButtonActive : null }
+            onPress={()=> setTimerType(p)}
+            >
+              <Text style={styles.contextButtonText}>
+                {p.display}
+              </Text>
+            </Pressable>
+          ))}
         </View>
         <Text style={styles.timer}>
-         {new Date(timerType.initialValue * 1000).toLocaleTimeString('pt-br', {minute: '2-digit', second: '2-digit'})}
+          {new Date(timerType.initialValue * 1000).toLocaleTimeString('pt-br', { minute: '2-digit', second: '2-digit' })}
         </Text>
         <Pressable style={styles.button}>
           <Text style={styles.buttonText}>Começar</Text>
@@ -79,41 +78,41 @@ const styles = StyleSheet.create({
     borderColor: '#144480',
     gap: 32,
   },
-  context:{
+  context: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
   contextButtonText: {
     fontSize: 12.5,
-    color: '#FFF', 
-    padding: 8, 
+    color: '#FFF',
+    padding: 8,
   },
   contextButtonActive: {
     backgroundColor: '#144480',
     borderRadius: 8
-  }, 
+  },
   timer: {
     fontSize: 54,
     fontWeight: 'bold',
     color: "#FFF",
-    textAlign: 'center', 
+    textAlign: 'center',
   },
   button: {
     backgroundColor: "#BB72FF",
     borderRadius: 32,
-    padding: 8, 
+    padding: 8,
   },
   buttonText: {
     textAlign: 'center',
     color: '#021123',
     fontSize: 18,
   },
-  footer:{
-   width: '80%',
+  footer: {
+    width: '80%',
   },
   footerText: {
-    textAlign: 'center',    
+    textAlign: 'center',
     color: '#98A0A8',
     fontSize: 12.5,
   },

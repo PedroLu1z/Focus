@@ -3,23 +3,25 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { ActionButton } from '../components/ActionButton';
 import { FokusButton } from '../components/FokusButton';
 import { Timer } from '../components/Timer';
+import { IconPause, IconPlay } from '../components/icons';
+
 const pomodoro = [
   {
     id: 'focus',
-    initialValue: 25,
+    initialValue: 25 * 60,
     image: require('./pomodoro.png'),
     display: 'Focus'
 
   },
   {
     id: 'short',
-    initialValue: 5,
+    initialValue: 5 * 60,
     image: require('./short.png'),
     display: 'Pausa curta'
   },
   {
     id: 'long',
-    initialValue: 15,
+    initialValue: 15 * 60,
     image: require('./long.png'),
     display: 'Pausa Longa'
   }
@@ -65,7 +67,6 @@ export default function Index() {
         }
         return oldState - 1 
       })
-      console.log("timer rolando")
     }, 1000)
     timerRef.current = id
   }
@@ -87,6 +88,7 @@ export default function Index() {
         <Timer totalSeconds={seconds}/>
         <FokusButton 
         title={timerRunning ? 'Pausar' : 'Começar'}
+        icon={timerRunning ? <IconPause/> : <IconPlay/>}
         onPress={toggleTimer}/>
       </View>
       <View style={styles.footer}>
